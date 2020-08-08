@@ -31,7 +31,7 @@ jobs:
       - checkout
       - deploy:
           name: Rsync app
-          command: rsync -az -e 'ssh' bin/Release/netcoreapp3.1/publish/ $SSH_USER@$SSH_HOST:/home/deploy/apps/BlazorExampleApp
+          command: rsync -ae 'ssh' bin/Release/netcoreapp3.1/publish/ $SSH_USER@$SSH_HOST:/home/deploy/apps/BlazorExampleApp
       - deploy:
           name: Restart suervisorclt
           command: ssh $SSH_USER@$SSH_HOST "sudo supervisorctl restart web-BlazorExampleApp"
