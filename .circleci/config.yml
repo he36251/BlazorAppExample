@@ -35,7 +35,7 @@ jobs:
           command: rsync -avz -e 'ssh' bin/Release/netcoreapp3.1/publish/ 45.76.124.226@root:/home/deploy/apps/BlazorExampleApp
       - deploy:
           name: Restart suervisorclt
-          command: ssh 45.76.124.226@root "sudo supervisorctl restart web-myapp"
+          command: ssh 45.76.124.226@root "sudo supervisorctl restart web-BlazorExampleApp"
 
 workflows:
   test_and_build_and_deploy:
