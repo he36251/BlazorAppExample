@@ -1,14 +1,10 @@
 version: 2.1
 
-orbs:
-  win: circleci/windows@2.2.0
-  rsync: germade/rsync@0.0.1
-
 jobs:
   test:
     description: Do some example testing first
-    executor:
-      name: win/default
+    machine:
+      image: 'ubuntu-1604:201903-01'
     steps:
       - checkout
       - run:
@@ -19,7 +15,8 @@ jobs:
           command: dotnet.exe test
   build:
     description: Build app with Release configurations
-    executor: win/default
+    machine:
+      image: 'ubuntu-1604:201903-01'
 
     steps:
       - checkout
@@ -27,7 +24,8 @@ jobs:
         
   deploy:
     description: Deploy app to vm
-    executor: win/default
+    machine:
+      image: 'ubuntu-1604:201903-01'
     
     steps:
       - checkout
