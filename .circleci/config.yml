@@ -35,13 +35,16 @@ jobs:
             sudo apt-get install -y apt-transport-https && \
             sudo apt-get update && \
             sudo apt-get install -y dotnet-sdk-3.1
+      - run:
+          name: Install project dependencies
+          command: dotnet restore
       - run: dotnet build --configuration Release
       - run:
           name: Test ssh connection
           command: ssh $SSH_USER@$SSH_HOST "echo deploying..."
       - run:
           name: Rsync app
-          command: rsync -avzhe ssh --progress bin/Release/netcoreapp3.1/ $SSH_USER@$SSH_HOST:/home/deploy/apps/BlazorExampleApp
+          command: rsync -avzhe ssh --progress ~/bin/Release/netcoreapp3.1/ $SSH_USER@$SSH_HOST:/home/deploy/apps/BlazorExampleApp
       - run:
           name: Restart supervisorclt
           command: ssh $SSH_USER@$SSH_HOST "sudo supervisorctl restart web-BlazorExampleApp"
