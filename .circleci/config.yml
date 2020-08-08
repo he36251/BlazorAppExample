@@ -21,8 +21,13 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Add package signing key
+          command: |
+            wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+            sudo dpkg -i packages-microsoft-prod.deb
+      - run:
           name: Install dotnet core 3.1
-          command: | 
+          command: |
             sudo apt-get update; 
             sudo apt-get install -y apt-transport-https && \
             sudo apt-get update && \
