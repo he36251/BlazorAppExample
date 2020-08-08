@@ -15,25 +15,23 @@ jobs:
           command: dotnet test
   build:
     description: Build app with Release configurations
-    docker:
-      - image: 'mcr.microsoft.com/dotnet/core/sdk:3.1'
+    machine:
+      image: 'ubuntu-1604:201903-01'
 
     steps:
       - checkout
+      - run:
+        name: Install dotnet core 3.1
+        command: 'sudo apt-get update; \
+          sudo apt-get install -y apt-transport-https && \
+          sudo apt-get update && \
+          sudo apt-get install -y dotnet-sdk-3.1'
       - run: dotnet build --configuration Release
-        
-  deploy:
-    description: Deploy app to vm
-    machine:
-      image: 'ubuntu-1604:201903-01'
-    
-    steps:
-      - checkout
-      - deploy:
+      - run:
           name: Rsync app
           command: rsync -avzhe ssh --progress bin/Release/netcoreapp3.1/ $SSH_USER@$SSH_HOST:/home/deploy/apps/BlazorExampleApp
-      - deploy:
-          name: Restart suervisorclt
+      - run:
+          name: Restart supervisorclt
           command: ssh $SSH_USER@$SSH_HOST "sudo supervisorctl restart web-BlazorExampleApp"
 
 workflows:
@@ -43,12 +41,6 @@ workflows:
       - build:
           requires:
             - test
-          filters:
-            branches:
-              only: master # only deploy on the master branch
-      - deploy:
-          requires:
-            - build
           filters:
             branches:
               only: master # only deploy on the master branch
