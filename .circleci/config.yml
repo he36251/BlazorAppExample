@@ -25,7 +25,7 @@ jobs:
       - run: dotnet build --configuration Release
         
   deploy:
-    decription: Deploy app to vm
+    description: Deploy app to vm
     executor: win/default
     
     steps:
