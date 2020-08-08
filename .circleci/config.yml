@@ -7,7 +7,7 @@ jobs:
   test:
     description: Do some example testing first
     executor:
-      name: windows/default
+      name: win/default
     steps:
       - checkout
       - run:
