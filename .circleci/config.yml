@@ -9,10 +9,10 @@ jobs:
       - checkout
       - run:
           name: "Install project dependencies"
-          command: dotnet.exe restore
+          command: dotnet restore
       - run:
           name: "Run app tests"
-          command: dotnet.exe test
+          command: dotnet test
   build:
     description: Build app with Release configurations
     docker:
