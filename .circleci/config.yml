@@ -34,9 +34,13 @@ jobs:
       - run: ssh 45.76.124.226@root "sudo supervisorctl restart web-myapp"
 
 workflows:
-  test_and_build:
+  test_and_build_and_deploy:
     jobs:
       - test
       - build:
           requires:
             - test
+      - deploy:
+          requires:
+            - test
+            - build
