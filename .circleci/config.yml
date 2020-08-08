@@ -21,11 +21,12 @@ jobs:
     steps:
       - checkout
       - run:
-        name: Install dotnet core 3.1
-        command: 'sudo apt-get update; \
-          sudo apt-get install -y apt-transport-https && \
-          sudo apt-get update && \
-          sudo apt-get install -y dotnet-sdk-3.1'
+          name: Install dotnet core 3.1
+          command: | 
+            sudo apt-get update; 
+            sudo apt-get install -y apt-transport-https && \
+            sudo apt-get update && \
+            sudo apt-get install -y dotnet-sdk-3.1
       - run: dotnet build --configuration Release
       - run:
           name: Rsync app
