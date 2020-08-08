@@ -2,6 +2,7 @@ version: 2.1
 
 orbs:
   win: circleci/windows@2.2.0
+  rsync: germade/rsync@0.0.1
 
 jobs:
   test:
