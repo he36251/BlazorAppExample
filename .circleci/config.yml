@@ -3,8 +3,8 @@ version: 2.1
 jobs:
   test:
     description: Do some example testing first
-    machine:
-      image: 'ubuntu-1604:201903-01'
+    docker:
+      - image: 'mcr.microsoft.com/dotnet/core/sdk:3.1'
     steps:
       - checkout
       - run:
@@ -15,8 +15,8 @@ jobs:
           command: dotnet.exe test
   build:
     description: Build app with Release configurations
-    machine:
-      image: 'ubuntu-1604:201903-01'
+    docker:
+      - image: 'mcr.microsoft.com/dotnet/core/sdk:3.1'
 
     steps:
       - checkout
@@ -24,8 +24,8 @@ jobs:
         
   deploy:
     description: Deploy app to vm
-    machine:
-      image: 'ubuntu-1604:201903-01'
+    docker:
+      - image: 'mcr.microsoft.com/dotnet/core/sdk:3.1'
     
     steps:
       - checkout
