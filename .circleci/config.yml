@@ -23,10 +23,10 @@ jobs:
       - checkout
       - run: dotnet build --configuration Release
 
-  workflows:
-    test_and_build:
-      jobs:
-        - test
-        - build:
-            requires:
-              - test
+workflows:
+  test_and_build:
+    jobs:
+      - test
+      - build:
+          requires:
+            - test
