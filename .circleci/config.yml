@@ -35,7 +35,7 @@ jobs:
       - run:
           name: Install project dependencies
           command: dotnet restore
-      - run: dotnet build --configuration Release
+      - run: dotnet publish -c Release
       - run:
           name: Test ssh connection
           command: ssh $SSH_USER@$SSH_HOST "echo deploying..."
@@ -55,7 +55,7 @@ jobs:
             fi
       - run:
           name: Rsync app
-          command: rsync -avzhe ssh --progress BlazorAppExample/bin/Release/netcoreapp3.1/ $SSH_USER@$SSH_HOST:/home/deploy/apps/BlazorAppExample
+          command: rsync -avzhe ssh --progress BlazorAppExample/bin/Release/netcoreapp3.1/publish $SSH_USER@$SSH_HOST:/home/deploy/apps/BlazorAppExample
       - run:
           name: Restart supervisorclt
           command: ssh $SSH_USER@$SSH_HOST "sudo supervisorctl restart web-BlazorAppExample"
