@@ -50,7 +50,8 @@ jobs:
       - run:
           name: Check if app directory exists...
           command: |
-            if [[ -d bin/Release/netcoreapp3.1/publish/ ]]; then
+            ls;
+            if [[ -d bin/Release/netcoreapp3.1/ ]]; then
                 echo "SUCCESS"
             else
                 echo "FAIL"
