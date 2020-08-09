@@ -43,8 +43,10 @@ jobs:
           name: Test ssh connection
           command: ssh $SSH_USER@$SSH_HOST "echo deploying..."
       - run:
-          name: View container files...
-          command: ls
+          name: Go into app and view container files...
+          command: |
+            cd BlazorAppExample;
+            ls
       - run:
           name: Check if app directory exists...
           command: |
