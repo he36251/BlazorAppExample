@@ -43,6 +43,17 @@ jobs:
           name: Test ssh connection
           command: ssh $SSH_USER@$SSH_HOST "echo deploying..."
       - run:
+          name: View container files...
+          command: ls
+      - run:
+          name: Check if app directory exists...
+          command: |
+            if [[ -d bin/Release/netcoreapp3.1/publish/ ]]; then
+                echo "SUCCESS"
+            else
+                echo "FAIL"
+            fi
+      - run:
           name: Rsync app
           command: rsync -avzhe ssh --progress bin/Release/netcoreapp3.1/publish/ $SSH_USER@$SSH_HOST:/home/deploy/apps/BlazorExampleApp
       - run:
