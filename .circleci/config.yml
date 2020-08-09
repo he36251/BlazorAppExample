@@ -55,10 +55,10 @@ jobs:
             fi
       - run:
           name: Rsync app
-          command: rsync -avzhe ssh --progress BlazorAppExample/bin/Release/netcoreapp3.1/ $SSH_USER@$SSH_HOST:/home/deploy/apps/BlazorExampleApp
+          command: rsync -avzhe ssh --progress BlazorAppExample/bin/Release/netcoreapp3.1/ $SSH_USER@$SSH_HOST:/home/deploy/apps/BlazorAppExample
       - run:
           name: Restart supervisorclt
-          command: ssh $SSH_USER@$SSH_HOST "sudo supervisorctl restart web-BlazorExampleApp"
+          command: ssh $SSH_USER@$SSH_HOST "sudo supervisorctl restart web-BlazorAppExample"
 
 workflows:
   test_and_build_and_deploy:
