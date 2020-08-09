@@ -19,9 +19,6 @@ jobs:
       image: 'ubuntu-1604:201903-01'
 
     steps:
-      - add_ssh_keys:
-          fingerprints:
-            - "e6:e5:95:83:44:23:4f:d8:9d:40:2e:d0:d8:54:a0:4f"
       - checkout
       - run:
           name: Add package signing key
@@ -58,7 +55,7 @@ jobs:
             fi
       - run:
           name: Rsync app
-          command: rsync -avzhe ssh --progress ~/BlazorAppExample/bin/Release/netcoreapp3.1/ $SSH_USER@$SSH_HOST:/home/deploy/apps/BlazorExampleApp
+          command: rsync -avzhe ssh --progress BlazorAppExample/bin/Release/netcoreapp3.1/ $SSH_USER@$SSH_HOST:/home/deploy/apps/BlazorExampleApp
       - run:
           name: Restart supervisorclt
           command: ssh $SSH_USER@$SSH_HOST "sudo supervisorctl restart web-BlazorExampleApp"
