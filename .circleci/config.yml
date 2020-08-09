@@ -51,14 +51,14 @@ jobs:
           name: Check if app directory exists...
           command: |
             ls;
-            if [[ -d bin/Release/netcoreapp3.1/ ]]; then
+            if [[ -d BlazorAppExample/bin/Release/netcoreapp3.1/ ]]; then
                 echo "SUCCESS"
             else
                 echo "FAIL"
             fi
       - run:
           name: Rsync app
-          command: rsync -avzhe ssh --progress bin/Release/netcoreapp3.1/publish/ $SSH_USER@$SSH_HOST:/home/deploy/apps/BlazorExampleApp
+          command: rsync -avzhe ssh --progress /BlazorAppExample/bin/Release/netcoreapp3.1/publish/ $SSH_USER@$SSH_HOST:/home/deploy/apps/BlazorExampleApp
       - run:
           name: Restart supervisorclt
           command: ssh $SSH_USER@$SSH_HOST "sudo supervisorctl restart web-BlazorExampleApp"
